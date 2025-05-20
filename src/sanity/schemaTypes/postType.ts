@@ -1,0 +1,84 @@
+import {DocumentTextIcon} from '@sanity/icons'
+import {defineArrayMember, defineField, defineType} from 'sanity'
+
+export const postType = defineType({
+  name: 'post',
+  title: 'Post',
+  type: 'document',
+  icon: DocumentTextIcon,
+  options: {
+    aiAssist: { exclude: false },
+  },
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      options: {
+        aiAssist: {
+          translateAction: true,
+        },
+      },
+    }),
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+      },
+    }),
+    defineField({
+      name: 'author',
+      type: 'reference',
+      to: {type: 'author'},
+    }),
+    defineField({
+      name: 'mainImage',
+      type: 'image',
+      options: {
+        hotspot: true,
+        aiAssist: {
+          imageDescriptionField: 'alt', // This should match your alt field name
+          imageInstructionField: 'imagePrompt',
+
+        }
+      },
+      fields: [{
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          options: {
+            isHighlighted: true, // <-- make this field easily accessible
+            aiAssist: {
+              imageDescriptionField: 'mainImage' // This should match your image field name
+            }
+          },
+        }
+      ]
+    }),
+    
+    defineField({
+      name: 'categories',
+      type: 'array',
+      of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
+    }),
+    defineField({
+      name: 'publishedAt',
+      type: 'datetime',
+    }),
+    defineField({
+      name: 'body',
+      type: 'blockContent',
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      author: 'author.name',
+      media: 'mainImage',
+    },
+    prepare(selection) {
+      const {author} = selection
+      return {...selection, subtitle: author && `by ${author}`}
+    },
+  },
+})
