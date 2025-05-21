@@ -828,3 +828,99 @@ form.md-tnwr-search-form.is-searchbox-open label input {
 .md-twrn-rec-art-list.md-twrn-rec-art-list-done li:last-child {
   border: none
 }
+
+/* Post Archive Styles */
+.md-block-1.md-twrn-recommend-article-main {
+    position: relative;
+}
+
+.md-block-1.md-twrn-recommend-article-main .search-filter-controls {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.md-block-1.md-twrn-recommend-article-main input[type="text"],
+.md-block-1.md-twrn-recommend-article-main select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.md-block-1.md-twrn-recommend-article-main input[type="text"]:focus,
+.md-block-1.md-twrn-recommend-article-main select:focus {
+    border-color: #FF2532;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 37, 50, 0.1);
+}
+
+.md-block-1.md-twrn-recommend-article-main .sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.md-block-1.md-twrn-recommend-article-main .sort-button {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.md-block-1.md-twrn-recommend-article-main .sort-button:hover {
+    background-color: #f5f5f5;
+}
+
+.md-block-1.md-twrn-recommend-article-main .no-results {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+.md-block-1.md-twrn-recommend-article-main .btn-wrap {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.md-block-1.md-twrn-recommend-article-main .blog-load-more-btn {
+    background: none;
+    border: 2px solid #FF2532;
+    color: #FF2532;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.md-block-1.md-twrn-recommend-article-main .blog-load-more-btn:hover {
+    background-color: #FF2532;
+    color: #fff;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .md-block-1.md-twrn-recommend-article-main .search-filter-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .md-block-1.md-twrn-recommend-article-main input[type="text"],
+    .md-block-1.md-twrn-recommend-article-main select {
+        width: 100%;
+    }
+
+    .md-block-1.md-twrn-recommend-article-main .sort-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

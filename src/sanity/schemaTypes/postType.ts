@@ -6,18 +6,15 @@ export const postType = defineType({
   title: 'Post',
   type: 'document',
   icon: DocumentTextIcon,
-  options: {
-    aiAssist: { exclude: false },
-  },
   fields: [
     defineField({
       name: 'title',
       type: 'string',
-      options: {
-        aiAssist: {
-          translateAction: true,
-        },
-      },
+      // options: {
+      //   aiAssist: {
+      //     translateAction: true,
+      //   },
+      // },
     }),
     defineField({
       name: 'slug',
@@ -36,22 +33,22 @@ export const postType = defineType({
       type: 'image',
       options: {
         hotspot: true,
-        aiAssist: {
-          imageDescriptionField: 'alt', // This should match your alt field name
-          imageInstructionField: 'imagePrompt',
+        // aiAssist: {
+        //   imageDescriptionField: 'alt', // This should match your alt field name
+        //   imageInstructionField: 'imagePrompt',
 
-        }
+        // }
       },
       fields: [{
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
-          options: {
-            isHighlighted: true, // <-- make this field easily accessible
-            aiAssist: {
-              imageDescriptionField: 'mainImage' // This should match your image field name
-            }
-          },
+          // options: {
+          //   isHighlighted: true, // <-- make this field easily accessible
+          //   aiAssist: {
+          //     imageDescriptionField: 'mainImage' // This should match your image field name
+          //   }
+          // },
         }
       ]
     }),

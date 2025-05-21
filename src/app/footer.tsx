@@ -1,8 +1,6 @@
 
 
 export default async function Footer() {
-
-
     return (
         <footer id="colophon" className="site-footer">
             <div className="container">

@@ -68,71 +68,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Category = {
-  _id: string;
-  _type: "category";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  description?: string;
-};
-
-export type BlockContent = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-  listItem?: "bullet";
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-} | {
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-  };
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-  _type: "image";
-  _key: string;
-}>;
-
-export type TranslationMetadata = {
-  _id: string;
-  _type: "translation.metadata";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  translations?: Array<{
-    _key: string;
-  } & InternationalizedArrayReferenceValue>;
-  schemaTypes?: Array<string>;
-};
-
-export type InternationalizedArrayReferenceValue = {
-  _type: "internationalizedArrayReferenceValue";
-  value?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "post";
-  };
-};
-
 export type Post = {
   _id: string;
   _type: "post";
@@ -168,7 +103,37 @@ export type Post = {
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   publishedAt?: string;
-  body?: BlockContent;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
 };
 
 export type Author = {
@@ -210,6 +175,55 @@ export type Author = {
     _key: string;
   }>;
 };
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type BlockContent = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+  listItem?: "bullet";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+} | {
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
+  _type: "image";
+  _key: string;
+}>;
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
@@ -268,152 +282,86 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type InternationalizedArrayReference = Array<{
-  _key: string;
-} & InternationalizedArrayReferenceValue>;
-
-export type SanityAssistInstructionTask = {
-  _type: "sanity.assist.instructionTask";
-  path?: string;
-  instructionKey?: string;
-  started?: string;
-  updated?: string;
-  info?: string;
-};
-
-export type SanityAssistTaskStatus = {
-  _type: "sanity.assist.task.status";
-  tasks?: Array<{
-    _key: string;
-  } & SanityAssistInstructionTask>;
-};
-
-export type SanityAssistSchemaTypeAnnotations = {
-  _type: "sanity.assist.schemaType.annotations";
-  title?: string;
-  fields?: Array<{
-    _key: string;
-  } & SanityAssistSchemaTypeField>;
-};
-
-export type SanityAssistOutputType = {
-  _type: "sanity.assist.output.type";
-  type?: string;
-};
-
-export type SanityAssistOutputField = {
-  _type: "sanity.assist.output.field";
-  path?: string;
-};
-
-export type SanityAssistInstructionContext = {
-  _type: "sanity.assist.instruction.context";
-  reference?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "assist.instruction.context";
-  };
-};
-
-export type AssistInstructionContext = {
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./src/sanity/lib/queries.ts
+// Variable: POSTS_QUERY
+// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, mainImage, publishedAt, categories[]->{_id,title, slug},  author->{name, image,slug},}
+export type POSTS_QUERYResult = Array<{
   _id: string;
-  _type: "assist.instruction.context";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  context?: Array<{
+  title: string | null;
+  slug: Slug | null;
+  mainImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  publishedAt: string | null;
+  categories: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  author: {
+    name: string | null;
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    slug: Slug | null;
+  } | null;
+}>;
+// Variable: POST_QUERY
+// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage}
+export type POST_QUERYResult = {
+  title: string | null;
+  body: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
       _type: "span";
       _key: string;
     }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: null;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
     level?: number;
     _type: "block";
     _key: string;
-  }>;
-};
-
-export type SanityAssistInstructionUserInput = {
-  _type: "sanity.assist.instruction.userInput";
-  message?: string;
-  description?: string;
-};
-
-export type SanityAssistInstructionPrompt = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
   } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
     _key: string;
-  } & SanityAssistInstructionFieldRef | {
-    _key: string;
-  } & SanityAssistInstructionContext | {
-    _key: string;
-  } & SanityAssistInstructionUserInput>;
-  style?: "normal";
-  listItem?: never;
-  markDefs?: null;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
-
-export type SanityAssistInstructionFieldRef = {
-  _type: "sanity.assist.instruction.fieldRef";
-  path?: string;
-};
-
-export type SanityAssistInstruction = {
-  _type: "sanity.assist.instruction";
-  prompt?: SanityAssistInstructionPrompt;
-  icon?: string;
-  title?: string;
-  userId?: string;
-  createdById?: string;
-  output?: Array<{
-    _key: string;
-  } & SanityAssistOutputField | {
-    _key: string;
-  } & SanityAssistOutputType>;
-};
-
-export type SanityAssistSchemaTypeField = {
-  _type: "sanity.assist.schemaType.field";
-  path?: string;
-  instructions?: Array<{
-    _key: string;
-  } & SanityAssistInstruction>;
-};
-
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Category | BlockContent | TranslationMetadata | InternationalizedArrayReferenceValue | Post | Author | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug | InternationalizedArrayReference | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField;
-export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/sanity/lib/queries.ts
-// Variable: POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug}
-export type POSTS_QUERYResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-}>;
-// Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage}
-export type POST_QUERYResult = {
-  title: string | null;
-  body: BlockContent | null;
+  }> | null;
   mainImage: {
     asset?: {
       _ref: string;
@@ -428,12 +376,16 @@ export type POST_QUERYResult = {
     _type: "image";
   } | null;
 } | null;
+// Variable: REDIRECTS_QUERY
+// Query: *[_type == "redirect" && isEnabled == true] {      source,      destination,      permanent  }
+export type REDIRECTS_QUERYResult = Array<never>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage, publishedAt, categories[]->{_id,title, slug},\n  author->{name, image,slug},\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
+    "\n  *[_type == \"redirect\" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n": REDIRECTS_QUERYResult;
   }
 }
